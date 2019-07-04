@@ -10,6 +10,8 @@ def generate_yolo_labels(json_path, save_path, fname_prefix=None, fname_postfix=
     print('start YOLO labels creation')
     with open(json_path) as json_file:
         data = json.load(json_file)
+        if not os.path.exists(save_path):
+            os.makedirs(save_path)
         for img in tqdm(data):
             img_name = str(img['name'][:-4])
             img_label_txt = (

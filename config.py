@@ -12,8 +12,8 @@ labels_save_path_train = labels_save_path + 'train/'
 labels_save_path_val = labels_save_path + 'val/'
 train_file_path = save_path + 'train.txt'
 val_file_path = save_path + 'val.txt'
-img_size = (1280, 720)
 
+img_size = (1280, 720)
 categories = {'car': 0,
               'bus': 1,
               'person': 2,
