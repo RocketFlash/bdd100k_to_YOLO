@@ -1,5 +1,5 @@
-user_name = ''
-owner_prefix = '/datasets/' + user_name + '/'
+user_name = 'rauf'
+owner_prefix = '/home/' + user_name + '/'
 dataset_path = owner_prefix + 'datasets/bdd100k/'
 labels_path = dataset_path + 'labels_bdd100k_format/'
 images_path = dataset_path + 'images/'
@@ -11,8 +11,8 @@ save_path = dataset_path + 'yolo_files/'
 labels_save_path = dataset_path + 'labels/'
 labels_save_path_train = labels_save_path + 'train/'
 labels_save_path_val = labels_save_path + 'val/'
-train_file_path = save_path + 'train.txt'
-val_file_path = save_path + 'val.txt'
+file_path_train = save_path + 'train.txt'
+file_path_val = save_path + 'val.txt'
 
 img_size = (1280, 720)
 categories = {'car': 0,
@@ -35,8 +35,8 @@ PATHS = {
     'images_path_val': images_path_val,
     'labels_path_json_train': labels_path_json_train,
     'labels_path_json_val': labels_path_json_val,
-    'train_file_path': train_file_path,
-    'val_file_path': val_file_path,
+    'file_path_train': file_path_train,
+    'file_path_val': file_path_val,
     'save_path': save_path,
     'labels_save_path': labels_save_path,
     'labels_save_path_train': labels_save_path_train,

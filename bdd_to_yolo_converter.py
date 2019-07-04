@@ -94,9 +94,9 @@ if __name__ == '__main__':
     generate_yolo_labels(PATHS['labels_path_json_val'], PATHS['labels_save_path_val'],
                          fname_prefix='val_', fname_postfix='_fake_B')
 
-    generate_yolo_filenames(PATHS['images_path_train'], PATHS['train_file_path'],
+    generate_yolo_filenames(PATHS['images_path_train'], PATHS['file_path_train'],
                             fname_prefix='train_', fname_postfix=None)
-    generate_yolo_filenames(PATHS['images_path_val'], PATHS['val_file_path'],
+    generate_yolo_filenames(PATHS['images_path_val'], PATHS['file_path_val'],
                             fname_prefix='val_', fname_postfix=None)
 
     generate_names_file(filename='bdd100k.names')
