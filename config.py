@@ -1,11 +1,12 @@
-owner_prefix = '/home/rauf/'
+user_name = ''
+owner_prefix = '/datasets/' + user_name + '/'
 dataset_path = owner_prefix + 'datasets/bdd100k/'
 labels_path = dataset_path + 'labels_bdd100k_format/'
 images_path = dataset_path + 'images/'
 images_path_train = images_path + 'train/'
 images_path_val = images_path + 'val/'
-train_labels_json_path = labels_path + 'bdd100k_labels_images_train.json'
-val_labels_json_path = labels_path + 'bdd100k_labels_images_val.json'
+labels_path_json_train = labels_path + 'bdd100k_labels_images_train.json'
+labels_path_json_val = labels_path + 'bdd100k_labels_images_val.json'
 save_path = dataset_path + 'yolo_files/'
 labels_save_path = dataset_path + 'labels/'
 labels_save_path_train = labels_save_path + 'train/'
@@ -32,8 +33,8 @@ PATHS = {
     'images_path': images_path,
     'images_path_train': images_path_train,
     'images_path_val': images_path_val,
-    'train_labels_json_path': train_labels_json_path,
-    'val_labels_json_path': val_labels_json_path,
+    'labels_path_json_train': labels_path_json_train,
+    'labels_path_json_val': labels_path_json_val,
     'train_file_path': train_file_path,
     'val_file_path': val_file_path,
     'save_path': save_path,
