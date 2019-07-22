@@ -65,6 +65,18 @@ def generate_yolo_filenames(imgs_path, labels_path, output_file_path):
     print('number of skipped files: {}'.format(count))
 
 
+def generate_test_filenames(imgs_path, output_file_path):
+    print('start YOLO test filenames file creation')
+    print(output_file_path)
+    with open(output_file_path, 'w+') as f:
+        for dirpath, dirs, files in os.walk(imgs_path):
+            for filename in tqdm(files):
+                if filename.endswith(".jpg"):
+                    file_path = os.path.join(
+                        PATHS['owner_prefix'], dirpath, filename)
+                    f.write(file_path + "\n")
+
+
 def generate_names_file(filename='bdd100k.names'):
     output_file_path = PATHS['save_path'] + filename
     with open(output_file_path, 'w+') as f:
@@ -79,6 +91,7 @@ def generate_data_file(filename='bdd100k.data'):
         f.write('classes = 10' + '\n')
         f.write('train = {}train.txt'.format(PATHS['save_path']) + '\n')
         f.write('valid = {}val.txt'.format(PATHS['save_path']) + '\n')
+        f.write('test = {}test.txt'.format(PATHS['save_path']) + '\n')
         f.write('names = {}bdd100k.names'.format(PATHS['save_path']) + '\n')
         f.write('backup = {}backup'.format(PATHS['save_path']) + '\n')
     print('{} created'.format(filename))
@@ -92,15 +105,17 @@ if __name__ == '__main__':
                          fname_prefix='val_', fname_postfix=None)
 
     # generate labels for augmented images
-    generate_yolo_labels(PATHS['labels_path_json_train'], PATHS['labels_save_path_train'],
-                         fname_prefix='train_', fname_postfix='_fake_B')
-    generate_yolo_labels(PATHS['labels_path_json_val'], PATHS['labels_save_path_val'],
-                         fname_prefix='val_', fname_postfix='_fake_B')
+    # generate_yolo_labels(PATHS['labels_path_json_train'], PATHS['labels_save_path_train'],
+    #                      fname_prefix='train_', fname_postfix='_fake_B')
+    # generate_yolo_labels(PATHS['labels_path_json_val'], PATHS['labels_save_path_val'],
+    #                      fname_prefix='val_', fname_postfix='_fake_B')
 
     generate_yolo_filenames(
         PATHS['images_path_train'], PATHS['labels_save_path_train'], PATHS['file_path_train'])
     generate_yolo_filenames(
         PATHS['images_path_val'], PATHS['labels_save_path_val'], PATHS['file_path_val'])
+
+    generate_test_filenames(PATHS['images_path_test'], PATHS['file_path_test'])
 
     generate_names_file(filename='bdd100k.names')
     generate_data_file(filename='bdd100k.data')
