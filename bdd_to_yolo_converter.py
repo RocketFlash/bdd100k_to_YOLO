@@ -7,7 +7,6 @@ from config import PATHS, categories, img_size
 def generate_yolo_labels(json_path, save_path, fname_prefix=None, fname_postfix=None):
     img_w, img_h = img_size
     ignore_categories = ["drivable area", "lane"]
-    print('start YOLO labels creation')
     with open(json_path) as json_file:
         data = json.load(json_file)
         if not os.path.exists(save_path):
@@ -48,8 +47,7 @@ def generate_yolo_labels(json_path, save_path, fname_prefix=None, fname_postfix=
 
 
 def generate_yolo_filenames(imgs_path, labels_path, output_file_path):
-    print('start YOLO filenames file creation')
-    print(output_file_path)
+    os.makedirs(PATHS['save_path'] , exist_ok=True)
     count = 0
     with open(output_file_path, 'w+') as f:
         for dirpath, dirs, files in os.walk(imgs_path):
@@ -65,19 +63,8 @@ def generate_yolo_filenames(imgs_path, labels_path, output_file_path):
     print('number of skipped files: {}'.format(count))
 
 
-def generate_test_filenames(imgs_path, output_file_path):
-    print('start YOLO test filenames file creation')
-    print(output_file_path)
-    with open(output_file_path, 'w+') as f:
-        for dirpath, dirs, files in os.walk(imgs_path):
-            for filename in tqdm(files):
-                if filename.endswith(".jpg"):
-                    file_path = os.path.join(
-                        PATHS['owner_prefix'], dirpath, filename)
-                    f.write(file_path + "\n")
-
-
 def generate_names_file(filename='bdd100k.names'):
+    os.makedirs(PATHS['save_path'] , exist_ok=True)
     output_file_path = PATHS['save_path'] + filename
     with open(output_file_path, 'w+') as f:
         for key, _ in categories.items():
@@ -86,6 +73,7 @@ def generate_names_file(filename='bdd100k.names'):
 
 
 def generate_data_file(filename='bdd100k.data'):
+    os.makedirs(PATHS['save_path'] , exist_ok=True)
     output_file_path = PATHS['save_path'] + filename
     with open(output_file_path, 'w+') as f:
         f.write('classes = 10' + '\n')
@@ -99,23 +87,30 @@ def generate_data_file(filename='bdd100k.data'):
 
 if __name__ == '__main__':
 
+    print('start YOLO labels creation')
     generate_yolo_labels(PATHS['labels_path_json_train'], PATHS['labels_save_path_train'],
                          fname_prefix='train_', fname_postfix=None)
     generate_yolo_labels(PATHS['labels_path_json_val'], PATHS['labels_save_path_val'],
                          fname_prefix='val_', fname_postfix=None)
 
-    # generate labels for augmented images
+    # # generate labels for augmented images
     # generate_yolo_labels(PATHS['labels_path_json_train'], PATHS['labels_save_path_train'],
     #                      fname_prefix='train_', fname_postfix='_fake_B')
     # generate_yolo_labels(PATHS['labels_path_json_val'], PATHS['labels_save_path_val'],
     #                      fname_prefix='val_', fname_postfix='_fake_B')
 
+    # # GENERATE TEST FILES
+    generate_yolo_labels(PATHS['labels_path_json_train'], PATHS['labels_save_path_test'],
+                         fname_prefix='train_', fname_postfix=None)
+    generate_yolo_labels(PATHS['labels_path_json_val'], PATHS['labels_save_path_test'],
+                         fname_prefix='val_', fname_postfix=None)
+
+    print('start YOLO filenames file creation')
     generate_yolo_filenames(
         PATHS['images_path_train'], PATHS['labels_save_path_train'], PATHS['file_path_train'])
     generate_yolo_filenames(
-        PATHS['images_path_val'], PATHS['labels_save_path_val'], PATHS['file_path_val'])
+        PATHS['images_path_test'], PATHS['labels_save_path_test'], PATHS['file_path_test'])
 
-    generate_test_filenames(PATHS['images_path_test'], PATHS['file_path_test'])
 
     generate_names_file(filename='bdd100k.names')
     generate_data_file(filename='bdd100k.data')

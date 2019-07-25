@@ -8,10 +8,11 @@ images_path_val = images_path + 'val/'
 images_path_test = images_path + 'test/'
 labels_path_json_train = labels_path + 'bdd100k_labels_images_train.json'
 labels_path_json_val = labels_path + 'bdd100k_labels_images_val.json'
-save_path = dataset_path + 'yolo_files/'
+save_path = dataset_path + 'yolo_files/without_gan/'
 labels_save_path = dataset_path + 'labels/'
 labels_save_path_train = labels_save_path + 'train/'
 labels_save_path_val = labels_save_path + 'val/'
+labels_save_path_test = labels_save_path + 'test/'
 file_path_train = save_path + 'train.txt'
 file_path_val = save_path + 'val.txt'
 file_path_test = save_path + 'test.txt'
@@ -44,5 +45,6 @@ PATHS = {
     'save_path': save_path,
     'labels_save_path': labels_save_path,
     'labels_save_path_train': labels_save_path_train,
-    'labels_save_path_val': labels_save_path_val
+    'labels_save_path_val': labels_save_path_val,
+    'labels_save_path_test': labels_save_path_test
 }
